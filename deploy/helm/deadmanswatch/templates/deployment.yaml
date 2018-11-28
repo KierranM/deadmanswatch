@@ -24,6 +24,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
+            - watch
             {{- if .Values.deadmanswatch.port }}
             - --port={{.Values.deadmanswatch.port}}
             {{- end }}

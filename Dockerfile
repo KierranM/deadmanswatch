@@ -18,5 +18,4 @@ COPY --from=builder /deadmanswatch ./
 COPY --from=builder /etc/passwd /etc/passwd
 USER deadmanswatch
 WORKDIR /
-ENTRYPOINT ["./deadmanswatch", "watch"]
-CMD ["-h"]
+ENTRYPOINT ["./deadmanswatch"]

@@ -20,6 +20,7 @@ spec:
           image: "kierranm/deadmanswatch:v0.0.1"
           imagePullPolicy: IfNotPresent
           args:
+            - watch
             - --port=8080
             - --listen-address=0.0.0.0
           ports:
