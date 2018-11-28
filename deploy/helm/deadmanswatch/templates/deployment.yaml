@@ -1,0 +1,86 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ include "deadmanswatch.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "deadmanswatch.name" . }}
+    helm.sh/chart: {{ include "deadmanswatch.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "deadmanswatch.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "deadmanswatch.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - watch
+            {{- if .Values.deadmanswatch.port }}
+            - --port={{.Values.deadmanswatch.port}}
+            {{- end }}
+            {{- if .Values.deadmanswatch.listenAddress }}
+            - --listen-address={{ .Values.deadmanswatch.listenAddress }}
+            {{- end }}
+            {{- if .Values.deadmanswatch.awsRegion }}
+            - --region={{ .Values.deadmanswatch.awsRegion }}
+            {{- end }}
+            {{- if .Values.deadmanswatch.heartbeatInterval }}
+            - --heartbeat-interval={{ .Values.deadmanswatch.heartbeatInterval }}
+            {{- end }}
+            {{- if .Values.deadmanswatch.gracefulTimeout }}
+            - --graceful-timeout={{ .Values.deadmanswatch.gracefulTimeout }}
+            {{- end }}
+            {{- if .Values.deadmanswatch.logLevel }}
+            - --log-level={{ .Values.deadmanswatch.logLevel }}
+            {{- end }}
+            {{- if .Values.deadmanswatch.metricName }}
+            - --metric-name={{ .Values.deadmanswatch.metricName }}
+            {{- end }}
+            {{- if .Values.deadmanswatch.metricNamespace }}
+            - --metric-namespace={{ .Values.deadmanswatch.metricNamespace }}
+            {{- end }}
+            {{- if .Values.deadmanswatch.alertSourceLabel }}
+            - --alert-source-label={{.Values.deadmanswatch.alertSourceLabel}}
+            {{- end }}
+            {{- if .Values.deadmanswatch.metricDimensions }}
+            - --metric-dimensions="{{ range $k, $v := .Values.deadmanswatch.metricDimensions }}{{$k}}={{$v}},{{ end }}"
+            {{- end }}
+            {{- range $key, $value := .Values.deadmanswatch.extraArgs }}
+            {{- if $value }}
+            - --{{ $key }}={{ $value }}
+            {{- else }}
+            - --{{ $key }}
+            {{- end }}
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.deadmanswatch.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: http
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
