@@ -8,14 +8,14 @@ podAnnotations: {}
 
 deadmanswatch:
   port: 8080
-  listenAddress: "0.0.0.0"  
+  listenAddress: "0.0.0.0"
   # awsRegion: us-west-2
   # heartbeatInterval: 1m
   # gracefulTimeout: 1m
   # logLevel: info
   # metricName: DeadMansSwitch
   # metricNamespace: DeadMansWatch
-  # alertSourceLabel: 
+  # alertSourceLabel:
   # metricDimensions:
   #   exampleKey: exampleName
   extraArgs: {}
