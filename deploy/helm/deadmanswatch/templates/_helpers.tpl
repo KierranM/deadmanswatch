@@ -30,3 +30,14 @@ Create chart name and version as used by the chart label.
 {{- define "deadmanswatch.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{/*
+Create serviceAccountName for deployment.
+*/}}
+{{- define "deadmanswatch.serviceAccountName" -}}
+{{- if .Values.serviceAccount.create -}}
+{{ default (include "deadmanswatch.fullname" .) .Values.serviceAccount.name }}
+{{- else -}}
+{{ default "default" .Values.serviceAccount.name }}
+{{- end -}}
+{{- end -}}
