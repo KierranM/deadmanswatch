@@ -57,7 +57,7 @@ spec:
             - --alert-source-label={{.Values.deadmanswatch.alertSourceLabel}}
             {{- end }}
             {{- if .Values.deadmanswatch.metricDimensions }}
-            - --metric-dimensions="{{ range $k, $v := .Values.deadmanswatch.metricDimensions }}{{$k}}={{$v}},{{ end }}"
+            - --metric-dimensions={{ include "deadmanswatch.metric-dimensions" . | quote }}
             {{- end }}
             {{- range $key, $value := .Values.deadmanswatch.extraArgs }}
             {{- if $value }}

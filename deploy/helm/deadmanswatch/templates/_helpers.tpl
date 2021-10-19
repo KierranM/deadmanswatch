@@ -41,3 +41,14 @@ Create serviceAccountName for deployment.
 {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Create metric-dimensions string.
+*/}}
+{{- define "deadmanswatch.metric-dimensions" -}}
+{{- $list := list -}}
+{{- range $k, $v := ( .Values.deadmanswatch.metricDimensions ) -}}
+{{- $list = append $list (printf "%s=%s" $k $v) -}}
+{{- end -}}
+{{ join "," $list }}
+{{- end -}}
