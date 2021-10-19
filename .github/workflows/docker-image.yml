@@ -16,18 +16,16 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@v2
-      -
-        name: Docker meta
+      - name: Docker meta
         id: meta
         uses: docker/metadata-action@v3
         with:
           # list of Docker images to use as base name for tags
           images: |
-            name/app
-            ghcr.io/username/app
+            kierranm/deadmanswatch
+            ghcr.io/kierranm/deadmanswatch
           # generate Docker tags based on the following events/attributes
           tags: |
             type=schedule
