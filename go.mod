@@ -3,7 +3,7 @@ module github.com/KierranM/deadmanswatch
 go 1.17
 
 require (
-	github.com/aws/aws-sdk-go v1.15.82
+	github.com/aws/aws-sdk-go v1.42.0
 	github.com/gorilla/mux v1.6.2
 	github.com/sirupsen/logrus v1.2.0
 	github.com/spf13/cobra v0.0.3
@@ -12,7 +12,7 @@ require (
 require (
 	github.com/gorilla/context v1.1.1 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
-	github.com/jmespath/go-jmespath v0.0.0-20160202185014-0b12d6b521d8 // indirect
+	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/konsorten/go-windows-terminal-sequences v1.0.1 // indirect
 	github.com/spf13/pflag v1.0.3 // indirect
 	golang.org/x/crypto v0.0.0-20181126163421-e657309f52e7 // indirect
