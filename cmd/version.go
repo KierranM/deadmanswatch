@@ -4,9 +4,10 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"github.com/aws/aws-sdk-go/aws"
 )
 
-const Version = "0.0.2"
+const Version = "1.0.0"
 
 func init() {
 	rootCmd.AddCommand(versionCmd)
@@ -18,5 +19,6 @@ var versionCmd = &cobra.Command{
 	Long:  `All software has versions. This is DeadMansWatch's`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Printf("DeadMansWatch v%s\n", Version)
+		fmt.Printf("  AWS SDK Version: v%s", aws.SDKVersion)
 	},
 }
