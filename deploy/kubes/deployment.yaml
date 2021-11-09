@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: deadmanswatch
-          image: "kierranm/deadmanswatch:v0.0.1"
+          image: "kierranm/deadmanswatch:v1.0.0"
           imagePullPolicy: IfNotPresent
           args:
             - watch

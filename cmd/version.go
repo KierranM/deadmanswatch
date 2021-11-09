@@ -7,7 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 )
 
-const Version = "0.0.2"
+const Version = "1.0.0"
 
 func init() {
 	rootCmd.AddCommand(versionCmd)
