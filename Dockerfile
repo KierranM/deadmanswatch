@@ -1,7 +1,7 @@
-FROM golang:1.17 AS builder
-LABEL maintainer="kierranm@gmail.com" \
+FROM public.ecr.aws/docker/library/golang:1.21 AS builder
+LABEL maintainer="cmartin@wiley.com" \
       description="Forwards prometheus DeadMansSwitch alerts to CloudWatch" \
-      version="1.0.0"
+      version="1.0.1"
 
 RUN useradd -u 10001 deadmanswatch
 
@@ -12,7 +12,7 @@ COPY ./main.go $GOPATH/src/github.com/KierranM/deadmanswatch/main.go
 COPY ./cmd $GOPATH/src/github.com/KierranM/deadmanswatch/cmd
 RUN go get
 RUN go test ./...
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix nocgo -o /deadmanswatch .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix nocgo -o /deadmanswatch .
 
 FROM alpine:latest AS cacerts
 RUN apk add --update ca-certificates
