@@ -1,7 +1,7 @@
-FROM golang:1.17 AS builder
+FROM golang:1.23 AS builder
 LABEL maintainer="kierranm@gmail.com" \
       description="Forwards prometheus DeadMansSwitch alerts to CloudWatch" \
-      version="1.0.0"
+      version="1.0.1"
 
 RUN useradd -u 10001 deadmanswatch
 
