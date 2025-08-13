@@ -1,4 +1,4 @@
-FROM golang:1.23 AS builder
+FROM golang:1.24 AS builder
 LABEL maintainer="kierranm@gmail.com" \
       description="Forwards prometheus DeadMansSwitch alerts to CloudWatch" \
       version="1.0.1"
