@@ -12,6 +12,12 @@ on:
     branches:
       - 'master'
 
+permissions:
+  contents: read
+  statuses: write
+  packages: write
+  pull-requests: write
+
 jobs:
   docker:
     runs-on: ubuntu-latest
