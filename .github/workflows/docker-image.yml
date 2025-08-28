@@ -65,7 +65,7 @@ jobs:
           load: true
           tags: kierranm/deadmanswatch:${{ github.sha }}
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@0.32.0
+        uses: aquasecurity/trivy-action@0.33.0
         with:
           image-ref: 'kierranm/deadmanswatch:${{ github.sha }}'
           format: 'table'
