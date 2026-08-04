@@ -3,7 +3,7 @@ LABEL maintainer="kierranm@gmail.com" \
       description="Forwards prometheus DeadMansSwitch alerts to CloudWatch" \
       version="1.0.1"
 
-RUN useradd -u 10001 deadmanswatch
+RUN adduser -D -u 10001 deadmanswatch
 
 # Copy the code from the host and compile it
 WORKDIR $GOPATH/src/github.com/KierranM/deadmanswatch
